@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Hello, WebVR! • A-Frame</title>
+    <meta name="description" content="Hello, WebVR! • A-Frame" />
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-ambisonic-component"></script>
+    <script src="./play-on-window-click.js"></script>
+    <script src="./hide-once-playing.js"></script>
+    <script src="./play-on-vrdisplayactivate-or-enter-vr.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/supermedium/aframe-environment-component@master/dist/aframe-environment-component.min.js"></script>
+  </head>
+  <body>
+    <a-scene background="color: #FAFAFA">
+      <!--    &domain=hollow-familiar-chopper.glitch.me -->
+      <!--    https://cdn.glitch.com/ad29f537-d9cd-4f91-afbb-6636d243e9af%2FAnderson-Nearfield.wav?v=1604485581706       -->
+      <!--    https://cdn.glitch.com/ad29f537-d9cd-4f91-afbb-6636d243e9af%2Faudio.mp3?v=1604493877660 -->
+      <!--    https://cdn.glitch.com/ad29f537-d9cd-4f91-afbb-6636d243e9af%2Faudio.opus?v=1604495457499 -->
+      <!--    crossorigin="anonymous" -->
+      <!--       preload="auto" -->
+      <a-assets>
+        <audio
+          id="audio"
+          src="https://cdn.glitch.com/ad29f537-d9cd-4f91-afbb-6636d243e9af%2FAnderson-Nearfield.wav?v=1604485581706&domain=hollow-familiar-chopper.glitch.me"
+          crossorigin="anonymous"
+        ></audio>
+      </a-assets>
+      <a-entity environment="preset:forest;dressing1OnPlayArea:0"></a-entity>
+      <a-box
+        position="-1 0.5 -3"
+        rotation="0 45 0"
+        color="#4CC3D9"
+        shadow
+      ></a-box>
+      <a-sphere
+        position="0 1.25 -5"
+        radius="1.25"
+        color="#EF2D5E"
+        shadow
+      ></a-sphere>
+      <a-cylinder
+        position="1 0.75 -3"
+        radius="0.5"
+        height="1.5"
+        color="#FFC65D"
+        shadow
+      ></a-cylinder>
+
+      <a-ambisonic
+        id="ambisonics"
+        src="#audio"
+        order="1"
+        play-on-window-click
+        play-on-vrdisplayactivate-or-enter-vr
+      >
+      </a-ambisonic>
+      <a-camera look-controls="pointerLockEnabled:true">
+        <!-- Text element for display messaging.  Hide once audio is playing. -->
+        <a-entity
+          id="msg"
+          position="0 -0.3 -1.5"
+          text="align:center; 
+					width:3;
+					wrapCount:100;
+					color:white;
+					value:Click window to make audio play."
+          hide-once-playing="#ambisonics"
+        >
+        </a-entity>
+      </a-camera>
+    </a-scene>
+  </body>
+  <script></script>
+</html>
